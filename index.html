@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width = device-width">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <title>Patient Form</title>
+    <style>
+        /* #bosy-color {
+            background-image: linear-gradient(rgb(214, 95, 95), rgb(82, 82, 136), rgb(177, 139, 68), rgb(80, 165, 165));
+        } */
+
+        #panelmain {
+            margin-top: 4rem;
+            border-style: none;
+            border-radius: 40px;
+        }
+
+        #panelmain:hover {
+            box-shadow: 0px 0px 10px 5px black;
+            transition: ease-in-out 0.5s;
+        }
+
+        #panel-title {
+            text-align: center;
+            font-size: 40px;
+            font-family: "Audiowide";
+            text-shadow: 1px 1px 1px cyan;
+        }
+
+        #panel-heading {
+            background-color: aliceblue;
+        }
+
+        #panel-heading {
+            background-color: black;
+            color: white;
+        }
+
+        .panel-body input {
+            border-radius: 30px;
+            background-color: aliceblue;
+        }
+
+        .panel-body input:hover {
+            transform: scale(1.04);
+            transition: ease-in-out 0.3s;
+        }
+
+        .panel-body label {
+            text-align: center;
+            font-size: large;
+            font-weight: 400;
+            font-family: "Audiowide";
+        }
+
+        #button1 {
+            float: right;
+            font-size: large;
+            font-weight: 300px;
+            font-family: "Audiowide";
+            background-color: aliceblue;
+            color: black;
+            border-radius: 15px;
+        }
+
+        #button1:hover {
+            background-color: blueviolet;
+            transition: all 0.2s;
+            transform: scale(1.02);
+            color: white;
+        }
+
+        #thead {
+            font-size: medium;
+            font-weight: 400;
+            font-family: "Audiowide";
+            background-color: rgb(149, 182, 93);
+            color: black;
+        }
+
+        #thead:hover {
+            font-weight: 500;
+            transition: ease-in-out 0.3s;
+            color: white;
+        }
+
+        #body-table {
+            font-size: medium;
+            color: black;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: aliceblue;
+
+        }
+
+        #modal-result {
+            font-size: 40px;
+            font-weight: 700;
+            font-family: "Audiowide";
+            text-shadow: 1px 1px 1px white;
+            /* background-color: antiquewhite; */
+        }
+
+        #modal-header {
+            background-color: antiquewhite;
+        }
+
+        #modal-header:hover {
+            background-color: blueviolet;
+            color:red;
+        }
+
+        #modal-content {
+            border-radius: 30px;
+
+        }
+
+        #modal-content:hover {
+            box-shadow: 0px 0px 10px 5px black;
+            transition: ease-in-out 0.5s;
+        }
+
+        #table-header:hover {
+            background-color: brown;
+        }
+        .modal-footer button{
+            font-size: medium;
+            font-weight: 400;
+            font-family: "Audiowide";
+            border-radius: 15px;
+        }
+        #show2:hover{
+            background-color: rgb(187, 63, 63);
+            color: white;
+            transition: all 0.5s
+        }
+        #show1:hover{
+            background-color: rgb(21, 131, 175);
+            color: white;
+            transition: all 0.5s;
+        }
+        #show:hover{
+            background-color: rgb(46, 102, 46);
+            color: white;
+            transition: all 0.5s;
+        }
+        #body-table{
+            font-size: medium;
+            font-weight: 800;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .hellow12::before{
+            content: '';
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            background:url('https://source.unsplash.com/collection/190727/1600x900') no-repeat center center/cover;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+        }
+    </style>
+    <script>
+        var Patient = [];
+        var index = -1;
+        function show() {
+            var a = Number(document.getElementById("pid").value);
+            var b = document.getElementById("pname").value;
+            var c = document.getElementById("date").value;
+            var d = document.getAnimations("time").value;
+            var e = document.getElementById("dr").value;
+            var f = document.getElementById("textname").value;
+            var g = document.getElementById("textdate").value;
+            var h = document.getElementById("texttime").value;
+            var i = document.getElementById("textresult").value;
+            var j = document.getElementById("textcharge").value;
+            var st = {
+                "Patient_Id": a, "Patient_Name": b, "Enquiry_Date": c, "Consulting_Dr": e,
+                "Test_Name": f, "Test_Date": g, "Test_Time": h, "Test_Result": i, "Test_Charge": j
+            };
+            Patient.push(st);
+            display();
+        }
+        function display() {
+            var p = " ";
+            for (var i = 0; i < Patient.length; i++) {
+                if (Patient[i].Patient_Id == '') {
+                    continue;
+                }
+                p += "<tr><td>" + Patient[i].Patient_Id + "</td><td>" + Patient[i].Patient_Name + "</td><td>" + Patient[i].Enquiry_Date +
+                    "</td><td>" + Patient[i].Consulting_Dr + "</td><td>" + Patient[i].Test_Name + "</td><td>" + Patient[i].Test_Date +
+                    "</td><td>" + Patient[i].Test_Time + "</td><td>" + Patient[i].Test_Result + "</td><td>" + Patient[i].Test_Charge +
+                    "</td><td>" + "<button type='button' class='btn btn-default' id=cut onclick='remove(" + i + ")'>X</button>" + "&nbsp;"
+                    + "<button type='button' class='btn btn-default' onclick='edit(" + i + ")' data-target='#resultsof' data-toggle='modal' id='editbtn'>Edit</button>" + "</td></tr>";
+            }
+            window.r =p;
+            document.getElementById("body_table").innerHTML = window.r;
+        }
+        function remove(h) {
+            let confirmbox= confirm("Do you want to delete ?");
+            if (confirmbox) {
+                Patient.splice(h, 1);
+                display();
+                let g ='<tr><td>'+''+'</td><td>'+''+'</td><td>'+''+'</td><td>'+''+'</td><td>'+''+'</td><td>'+
+                    ''+'</td><td>'+''+'</td><td>'+''+'</td><td>'+''+'</td><td>'+''+'</td></tr>'
+                if(window.r==g){
+            alert("please fill up the following requirement");
+            }
+            }
+        }
+        function edit(k) {
+            index = k;
+            var st = Patient[k];
+            document.getElementById("textname").value = st.Test_Name;
+            document.getElementById("textdate").value = st.Test_Date;
+            document.getElementById("texttime").value = st.Test_Time;
+            document.getElementById("textresult").value = st.Test_Result;
+            document.getElementById("textcharge").value = st.Test_Charge;
+        }
+        function update() {
+            var a = document.getElementById("textname").value;
+            var b = document.getElementById("textdate").value;
+            var c = document.getElementById("texttime").value;
+            var d = document.getElementById("textresult").value;
+            var e = document.getElementById("textcharge").value;
+            var f = document.getElementById("pid").value;
+            var g = document.getElementById("pname").value;
+            var h = document.getElementById("date").value;
+            var i = document.getElementById("time").value;
+            var j = document.getElementById("dr").value;
+            var st = {
+                "Test_Name": a, "Test_Date": b, "Test_Time": c, "Test_Result": d, "Test_Charge": e, "Patient_Id": f, "Patient_Name": g, "Enquiry_Date": h,
+                "Enquiry_Time": i, "Consulting_Dr": j
+            };
+            Patient[index] = st;
+            display();
+        }
+        $(document).ready(function(){
+            $('#show').click(function(){
+               $('#table-header').show(); 
+            });
+        });
+    </script>
+</head>
+
+<body id="bosy-color">
+    <div class="hellow12"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="panel panel-default" id="panelmain">
+                    <div class="panel-heading" id="panel-heading">
+                        <h1 class="panel-title" id="panel-title">Registration Form</h1>
+                    </div>
+                    <div class="panel-body" id="paneldis">
+                        <div class="disabled">
+                        <label for="patient id">Patient_Id:</label>
+                        <input type="text" class="form-control" id="pid">
+                        <label for="patient name">Patient_Name:</label>
+                        <input type="text" class="form-control" id="pname">
+                        <label for="edate">Enquiry_Date:</label>
+                        <input type="date" class="form-control" id="date">
+                        <label for="etime">Enquiry_Time:</label>
+                        <input type="time" class="form-control" id="time">
+                        <label for="dr">Consulting_Dr: </label>
+                        <input type="text" class="form-control" id="dr"><br>
+                        <button type="button" class="btn btn-defalt" data-target="#resultsof" data-toggle="modal"
+                            id="button1">Add Test</button></div>
+                        <div class="modal fade" id="resultsof" role="dialog">
+                            <div class="modal-dialog">
+
+                                <div class="modal-content" id="modal-content">
+                                    <div class="modal-header" id="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h2 class="modal-title" id="modal-result">
+                                            <center>Test Details</center>
+                                        </h2>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Here we draw the content of the modal body -->
+                                        <div class="form-group">
+                                            <label for="tname">Test_Name:</label>
+                                            <input type="text" id="textname" class=" form-control">
+                                            <label for="tdate">Test_Date: </label>
+                                            <input type="date" id="textdate" class=" form-control">
+                                            <label for="Test_Time">Test_Time:</label>
+                                            <input type="time" id="texttime" class=" form-control">
+                                            <label for="tre">Test_Result: </label>
+                                            <input type="text" id="textresult" class=" form-control">
+                                            <label for="tcharge">Test_Charge:</label>
+                                            <input type="text" id="textcharge" class=" form-control">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default panel-title" onclick="show()"
+                                            data-dismiss="modal" id="show">Submit</button>
+                                        <button type="button" class="btn btn-default" onclick="update()"
+                                            data-dismiss="modal" id="show1">Update</button>
+                                        <button type="button" class="btn btn-default"
+                                            data-dismiss="modal" id="show2">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover table-striped" border="1" id="table-header" hidden>
+                        <thead id="thead">
+                            <tr>
+                                <th>Patient Id</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Doctor</th>
+                                <th>Test Name</th>
+                                <th>Test Date</th>
+                                <th>Test Time</th>
+                                <th>Result</th>
+                                <th>Charge</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body_table"></tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
